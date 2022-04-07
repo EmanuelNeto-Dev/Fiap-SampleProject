@@ -1,0 +1,6 @@
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/ParkingControlApplication.java
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/data/ParkingSpotDTO.java
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/services/ParkingSpotService.java
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/models/ParkingSpot.java
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/controllers/ParkingSpotController.java
+/Users/emanuel/Git/Fiap-SampleProject/parking-control/src/main/java/com/api/parkingcontrol/repositories/ParkingSpotRepository.java

@@ -6,6 +6,8 @@ Este repositório contém uma simples aplicação em Spring Boot para que possam
   * Java + Spring Boot
   * PostgreSQL
 
+## ADDING AND DEPLOYING JAVA + SPRING BOOT APPLICATION
+
 * Processo de Deploy a partir de um repositório de código via linha de Comando (openshift-cli)
 
   ```
@@ -26,3 +28,27 @@ Este repositório contém uma simples aplicação em Spring Boot para que possam
      * Poderá acontecer de a aplicação já utilizar libs do PostgreSQL e por isso, apresentar erros na inicialização. Porém após gerar a imagem da base de dados, efetuar deploy com as devidas configurações de acesso utilizando das variáveis já exisstentes na aplicação, estes erros irão sumir e a aplicação funcionará normalmente. *
       
  
+## ADDING A POSTGRESQL DATABASE
+
+* Adicionando uma base de dados PostgreSQL através da linha de comando
+  1. Para efetuar o deploy de uma base de dados PostgreSQL utilizando a linha de comando
+    ```
+    oc new-app  postgresql-persistent --name parking-control-db --param DATABASE_SERVICE_NAME=postgresql
+  
+    ```
+  2. Para configurar a aplicação já existente e já exposta para acessar e utilizar a base de dados que irá ser adicionada ao Openshift, deverão ser setados novos valores para as variáveis de ambiente existentes no arquivo de configuração existentes na aplicação.
+    ```
+    oc set env dc\fiap-sample-parking-control-api spring.datasource.url=jdbc:postgresql://postgresql:5432/parking-control-db 
+    oc set env dc\fiap-sample-parking-control-api spring.datasource.username=emanuel
+    oc set env dc\fiap-sample-parking-control-api spring.datasource.password=root
+    ```
+  3. Para criar novos usuários que sejam compatíveis com a string de conexão exposta e informada no serviço já existente, basta acessar o terminal disponível no serviço de banco de dados e executar a estrutura de códigos que segue abaixo:
+  
+    ```
+    psql postgres
+    CREATE ROLE emanuel WITH LOGIN PASSWORD 'root';
+    CREATE ROLE
+    ALTER ROLE emanuel Superuser;
+    ALTER ROLE
+    \q
+    ```

@@ -40,7 +40,7 @@ Este repositório contém uma simples aplicação em Spring Boot para que possam
   2. Para configurar a aplicação já existente e já exposta para acessar e utilizar a base de dados que irá ser adicionada ao Openshift, deverão ser setados novos valores para as variáveis de ambiente existentes no arquivo de configuração existentes na aplicação.
     ```
     oc set env dc\fiap-sample-parking-control-api spring.datasource.url=jdbc:postgresql://postgresql:5432/parking-control-db 
-    oc set env dc\fiap-sample-parking-control-api spring.datasource.username=emanuel
+    oc set env dc\fiap-sample-parking-control-api spring.datasource.username=postgres
     oc set env dc\fiap-sample-parking-control-api spring.datasource.password=root
     ```
   3. Para criar novos usuários que sejam compatíveis com a string de conexão exposta e informada no serviço já existente, basta acessar o terminal disponível no serviço de banco de dados e executar a estrutura de códigos que segue abaixo:

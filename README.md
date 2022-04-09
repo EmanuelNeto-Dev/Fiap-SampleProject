@@ -26,6 +26,7 @@ Este repositório contém uma simples aplicação em Spring Boot para que possam
   
   4. Aguarde o Build finalizar.
      * Poderá acontecer de a aplicação já utilizar libs do PostgreSQL e por isso, apresentar erros na inicialização. Porém após gerar a imagem da base de dados, efetuar deploy com as devidas configurações de acesso utilizando das variáveis já exisstentes na aplicação, estes erros irão sumir e a aplicação funcionará normalmente. *
+     * Ex.: ERROR CrashLoopBackOff
       
  
 ## ADDING A POSTGRESQL DATABASE
@@ -47,8 +48,28 @@ Este repositório contém uma simples aplicação em Spring Boot para que possam
     ```
     psql postgres
     CREATE ROLE emanuel WITH LOGIN PASSWORD 'root';
-    CREATE ROLE
     ALTER ROLE emanuel Superuser;
-    ALTER ROLE
+    ALTER USER postgres PASSWORD 'root';
     \q
+    ```
+ 4. Criando tabela de dados que será utilizada pela aplicação
+    ```
+    \c parking-control-db
+    
+    CREATE TABLE IF NOT EXISTS public.tb_parking_spot
+    (
+      id uuid NOT NULL,
+      car_brand character varying(70) COLLATE pg_catalog."default" NOT NULL,
+      car_color character varying(70) COLLATE pg_catalog."default" NOT NULL,
+      car_license_plate character varying(7) COLLATE pg_catalog."default" NOT NULL,
+      car_model character varying(70) COLLATE pg_catalog."default" NOT NULL,
+      "number" character varying(10) COLLATE pg_catalog."default" NOT NULL,
+      registration_date timestamp without time zone NOT NULL,
+      responsible_apartment character varying(30) COLLATE pg_catalog."default" NOT NULL,
+      responsible_block character varying(30) COLLATE pg_catalog."default" NOT NULL,
+      responsible_name character varying(130) COLLATE pg_catalog."default" NOT NULL,
+      CONSTRAINT tb_parking_spot_pkey PRIMARY KEY (id),
+      CONSTRAINT uk_9pwti59dwbk3ekww5noc4nxv5 UNIQUE ("number"),
+      CONSTRAINT uk_hixpj5249nnoq042fn2o7x2wl UNIQUE (car_license_plate);
+    )
     ```
